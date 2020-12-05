@@ -47,3 +47,8 @@ Feel free to contribute and collaborate
 2. Resolving same user-name conflicts
 3. adding feature to change user name
 4. BUG-: When a user is typing and at the same moment receives a msg in the chatroom
+
+## package
+sudo apt-get install libpthread-stubs0-dev
+## Compile 
+gcc -pthread -o term term.c
