@@ -1,54 +1,55 @@
-# Real-time-chat-application-in-c
+# Ứng dụng chat real time bằng ngôn ngữ C
 [![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://github.com/pranavdheer/Real-time-chat-application-in-c)
 [![Build Status](https://travis-ci.org/forksociety/PyBeacon.svg?branch=master)](https://github.com/pranavdheer/Real-time-chat-application-in-c)
 
-Using Socket programming and threading to make a real-time chatroom in c 
+Sử dụng lập trình Socket và đa luồng để tạo real-time chatroom bằng ngôn ngữ C 
 
 ## Note-: 
-1.  The above code is tested for MAC-OS, it should work with linux and windows but is untested. 
-2.  Server and Client script can be on the same local machine or on different machines. If you want to run the scripts on     different machine make sure you have the public IP address and appropriate machine-level permissions (remote connections) for the machine where you run the server script.
-3. You may run multiple client instances to test the script
 
-### Usage server script 
+1. Đoạn mã trên được kiểm tra cho Linux, nó sẽ hoạt động với MAC-OS và Windows nhưng chưa được kiểm tra. 
+2. Code Server và Client có thể nằm trên cùng một máy cục bộ hoặc trên các máy khác nhau. Nếu bạn muốn chạy đoạn code trên máy khác, hãy đảm bảo rằng bạn có địa chỉ IP công cộng và các quyền cấp máy phù hợp (kết nối từ xa) cho máy mà bạn chạy code Server.
+3. Bạn có thể chạy nhiều client để test.
+
+### Sử dụng đoạn script Server 
 ```bash
-./server ## script will run on port 80 by default
-./server 90 ## run the script on port 90
+./server ## script sẽ chạy trên cổng 80 by default
+./server 90 ## chạy đoạn script trên cổng 90
 ```
-### Usage client script 
+### Sử dụng đoạn script Client 
 ```bash
 ./client [-h] [-a] [-p] [-u]
- -h           show this help message and exit [optional]
- -a           IP address of the server [localhost if running on local machine] [required]
- -p           port number of the server [required]
- -u           username of the person [required]
+ -h           show guide này và thoát [optional]
+ -a           IP address của server [localhost nếu chạy trên local machine] [required]
+ -p           port number của server [required]
+ -u           username của ngưởi dùng [required]
 ```
-### Chatroom functionality
+### Chức năng chatroom
 
 
-| Command       | Parameter             | Desription                          |
-| ------------- | --------------------- | ----------------------------------- |
-| quit          |                       | Leave the chatroom                  |
-| msg           |  "text"               | send the msg to all online users (use"")    |
-| msg           |   "text" user         | Send the msg to a particular user              |
-| online        |                       | get the username of all the users online                    |
-| help          |                       | Show this help                      |
+| Command       | Parameter             | Desription                                 |
+| ------------- | --------------------- | -------------------------------------------|
+| quit          |                       | Thoát chatroom                             |
+| msg           |  "text"               | Gửi tin tới tất cả online users (use"")    |
+| msg           |  "text" user          | Gửi tin tới một user nhất định             |
+| online        |                       | Get username của tất cả users online       |
+| help          |                       | Show guide này                             |
 
 
 ### Server
-Each user is handled by a seperate thread in the server.The threads synchronise access to a global linked list 
-storing the user information
+Mỗi người dùng được xử lý bởi một thread riêng biệt trong máy chủ. Các thread đồng bộ hóa quyền truy cập vào danh sách liên kết chung
+lưu trữ thông tin người dùng
 
 ### Client
-When the client connects to the server, it executes a chatroom shell. Each client has 2 running threads one for sending commands and other for receiving msgs, both working in sync with each other.
+Khi Client kết nối với Server, nó sẽ tạo 1 chatroom. Mỗi Client có 2 luồng đang chạy, một để gửi lệnh và luồng kia để nhận tin nhắn, cả hai đều hoạt động đồng bộ với nhau.
 
-### TO DO and Contributions
-Feel free to contribute and collaborate 
-1. Making a testing environment to check for subtle synchronisation bugs
-2. Resolving same user-name conflicts
-3. adding feature to change user name
-4. BUG-: When a user is typing and at the same moment receives a msg in the chatroom
+### TO DO 
+1. Tạo môi trường thử nghiệm để kiểm tra các lỗi đồng bộ hóa
+2. Sửa cùng user-name conflicts
+3. Thêm feature để thay đổi user name
+4. BUGS-: + Khi user đang nhập và đồng thời nhận được một tin nhắn trong phòng trò chuyện
+          + Khi user gửi tin nhắn đến tất cả mọi người
 
-## package
+## Package
 sudo apt-get install libpthread-stubs0-dev
 ## Compile 
 gcc -pthread -o term term.c
